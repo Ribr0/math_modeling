@@ -1,0 +1,10 @@
+speed_of_light = 3 * 10**8 
+earth_mass = 5.97237 * 10**30
+sigma_steff_bolc = 5.67036713 * 10**(-8)
+gravity_constant = 6.67408 * 10**(-11)
+nuclear_magneton = 5.050824 * 10 ** (-27)
+bolcman_const = 1.380662 * 10 ** (-23)
+gyromag_ratio_for_proton = 2.6751987 * 10 **8
+pi = 3.14
+rest_of_mass_proton = 1.6726485 * 10**(-27)
+acc_of_gravity = 9.8
