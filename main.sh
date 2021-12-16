@@ -1,0 +1,1 @@
+python3 lab_3_task4.py
