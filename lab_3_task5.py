@@ -13,9 +13,12 @@ for i in range(N):
     else:
       a[i, j]= np.sin(N * (i+1) + M * (j+1))
     
-
-
-
 print(a)
+print()
 
+b = a[::,0]
+c = a[::,1]
 
+a[::,0] = c
+a[::,1] = b
+print(a)
