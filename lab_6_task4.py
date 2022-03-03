@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def arhimed_spir():
-  fi = np.arange(0, 2*np.pi, 0.1)
-  k = 1
-  r = 
-  
+def spir(b=2, alph=np.pi*5):
+  r = np.e ** (b * alph)
+  plt.plot(r)
+  plt.show()
+
+spir()
