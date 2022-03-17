@@ -3,9 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 fig, ax = plt.subplots()
-krug, = plt.plot([], [], 'o', color='r')
-
-xdata, ydata = [], []
+ball, = plt.plot([], [], '-', color='r', label='Ball')
 
 def circle_move(R, vx0, vy0, time):
   x0 = vx0 *time
@@ -20,11 +18,11 @@ plt.axis('equal')
 ax.set_xlim(-edge, edge)
 ax.set_ylim(-edge, edge)
 
-def update(i):
-  krug.det_data(circle_move(R=0.5, vx0=0.01, vy0=0.01, time=i))
+def animate(i):
+  ball.set_data(circle_move(R=0.5, vx0=0.01, vy0=0.01, time=i))
 
+ani = FuncAnimation(fig, animate, frames=180, interval=30)
 
-
-
+ani.save('anima_cloj.gif')
   
-  
+
