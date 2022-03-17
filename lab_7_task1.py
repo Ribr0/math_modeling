@@ -12,10 +12,15 @@ def update(R, t):
   y = R * (1-((np.cos(t)**3)))
   return x, y
 
+edge = 100
+plt.axis('equal')
+ax.set_xlim(-edge, edge)
+ax.set_ylim(-edge, edge)
+
 def animate(i):
-  cicloid.set_data(update(R=np.arange(-2*np.pi, 2*np.pi, 0.01), t=np.arange(-2*np.pi, 2*np.pi, 0.01)))
+  cicloid.set_data(update(R=np.arange(-1*np.pi, 1*np.pi, 0.01), t=i))
 
-ani = FuncAnimation(fig, animate, frames=180, interval=2)
+ani = FuncAnimation(fig, animate, frames=180, interval=30)
 
-ani.save('anima_2.gif')
+ani.save('anima_task1.gif')
 
