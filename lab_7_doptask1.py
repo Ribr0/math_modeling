@@ -19,12 +19,12 @@ def circle_func(R, N, t): #окружность
 fig, ax = plt.subplots()
 fig = plt.figure(figsize =(10,3), facecolor='pink', frameon=True)
 ball, = plt.plot([], [], color='r')
-ball2, = plt.plot([], [], color='g')
+ball2, = plt.plot([], [], 'o', color='g', ms=5)
 ball3, = plt.plot([], [], color='b')
 
 def animate(i):
   ball.set_data(cicloid(R=1, t=np.linspace(0, 4*np.pi*i/frames, i)))
-  ball2.set_data(cicloid(R=1, t=4*np.pi/frames))
+  ball2.set_data(cicloid(R=1, t=4*np.pi*i/frames))
   ball3.set_data(circle_func(R=1, N=100, t = 4*np.pi*i/frames))
 
 ani = FuncAnimation (fig, animate, frames=frames, interval=30)
