@@ -4,8 +4,11 @@ from matplotlib.animation import FuncAnimation
 
 fig, ax = plt.subplots() 
 cicloid, = plt.plot([], [], 'o', color='r')
+cicloid_graph, = plt.plot([], [], '-', color='r')
 
 xdata, ydata = [], []
+
+t = 60 
 
 def update(R, t):
   x = R * (t - (np.sin(t)))
@@ -19,6 +22,10 @@ ax.set_ylim(-edge, edge)
 
 def animate(i):
   cicloid.set_data(update(R=1, t=i))
+  xdata.append(update(R=1, t=i)[0])
+  ydata.append(update(R=1, t=i)[1])
+  print(xdata)
+  cicloid_graph.set_data(xdata[:i],ydata[:i])
 
 ani = FuncAnimation(fig, animate, frames=t, interval=10)
 
