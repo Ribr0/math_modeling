@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 frames=300
 def cicloid(R,t):
-  x = R * (t - np.sin(t))
-  y = R * (1- np.cos(t))
+  x = R * (np.cos(t)**3)
+  y = R * (np.sin(t)**3)
   return x, y
 
 def circle_func(R, N, t): #окружность 
@@ -16,17 +16,19 @@ def circle_func(R, N, t): #окружность
     y[i] = R + R * np.sin(alpha[i])
   return x, y
 
+def krug
+
 fig, ax = plt.subplots()
 fig = plt.figure(figsize =(10,3), facecolor='pink', frameon=True)
 ball, = plt.plot([], [], color='r')
 ball2, = plt.plot([], [], 'o', color='g', ms=5)
 ball3, = plt.plot([], [], color='b')
+ball4, = plt.plot([], [], color='b')
 
 def animate(i):
   ball.set_data(cicloid(R=1, t=np.linspace(0, 4*np.pi*i/frames, i)))
   ball2.set_data(cicloid(R=1, t=4*np.pi*i/frames))
   ball3.set_data(circle_func(R=1, N=100, t = 4*np.pi*i/frames))
-  
 
 ani = FuncAnimation (fig, animate, frames=frames, interval=30)
 
