@@ -20,7 +20,7 @@ def kaplya(R_k, a_k):
   return x, y 
 
 def animate(i):
-  voda.set_data(voda(R_k=1, a_v=i)
+  voda.set_data(voda(R_k=1, a_v=1)
   kaplya.set_data(kaplya(R_k=1, a_k=i))
 
 fig, ax = plt.subplots()

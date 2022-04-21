@@ -1,38 +1,36 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-frames = 120
+frames=300
 
-R_v = 1 # радиус воды
-R_k = 1.5 #радиус капли
-a_v = 1 # параметр шариков воды
-a_k = 1 # параметр капли
-
-def voda(R_v, a_v):
-  x = R_v * np.sin(a_v)
-  y = R_v * np.cos(a_v)
+def voda(R): 
+  alp = np.arange(0, np.pi*3, 0.1)
+  x = R * np.cos(alp)
+  y = R * np.sin(alp)
   return x, y
 
-def kaplya(R_k, a_k):
-  x = R_k * np.sin(a_k)
-  y = R_k * np.cos(a_k)
-  return x, y 
   
+def kaplya(R, N, t): 
+  x = np.zeros(N)
+  y = np.zeros(N)
+  for i in range(0, N, 1):
+    alpha = np.linspace(0, 2*np.pi, N)
+    x[i] = R * t + R * np.cos(alpha[i])
+    y[i] = R + R * np.sin(alpha[i])
+  return x, y
+
 fig, ax = plt.subplots()
 voda, = plt.plot([], [], color='black')
 kaplya, = plt.plot([], [], color='r')
 
 
 def animate(i):
+  voda.set_data(voda(R=1))
+  kaplya.set_data(circle_func(R=1, N=100, t = 4*np.pi*i/frames))
   
-  voda.set_data(voda())
-  kaplya.set_data(kaplya())
 
-ani = FuncAnimation(fig, animate, frames=frames, interval=30)
+ani = FuncAnimation (fig, animate, frames=frames, interval=30)
 
-
-plt.axis('equal')
-plt.xlim(-2,2)
-plt.ylim(-2,2)
-
+plt.xlim(-10,10)
+plt.ylim(-10,10)
 ani.save('pr.gif')
