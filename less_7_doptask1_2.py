@@ -21,8 +21,8 @@ def circle_func(R, N, t):
 
 def astroid_func(R, t):  
   alp = np.arange(0, np.pi*2, 0.1)
-  x = R/2 * np.cos(t) + R/2 * np.cos(alp) 
-  y = R/2 * np.sin(t) + R/2 * np.sin(alp) 
+  x = R/1.35 * np.cos(t) + R/4 * np.cos(alp) 
+  y = R/1.35 * np.sin(t) + R/4 * np.sin(alp) 
   return x, y
   
 fig, ax = plt.subplots()
@@ -37,7 +37,7 @@ def animate(i):
   ball2.set_data(cicloid(R=1, t=4*np.pi*i/frames))
   
   ball3.set_data(circle(R=1))
-  ball4.set_data(astroid_func(R=1, t=3*np.pi*i/frames))
+  ball4.set_data(astroid_func(R=1, t=4*np.pi*i/frames))
 
 ani = FuncAnimation(fig, animate, frames=frames, interval=30)
 
