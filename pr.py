@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-import time 
 frames = 120
 
 R_v = 1 # радиус воды
@@ -18,19 +17,22 @@ def kaplya(R_k, a_k):
   x = R_k * np.sin(a_k)
   y = R_k * np.cos(a_k)
   return x, y 
-
-def animate(i):
-  voda.set_data(voda(R_k=1, a_v=i)
-  kaplya.set_data(kaplya(R_k=1, a_k=i))
-
+  
 fig, ax = plt.subplots()
 voda, = plt.plot([], [], color='black')
 kaplya, = plt.plot([], [], color='r')
 
+
+def animate(i):
+  
+  voda.set_data(voda())
+  kaplya.set_data(kaplya())
+
 ani = FuncAnimation(fig, animate, frames=frames, interval=30)
 
-plt.axis('square')
-plt.xlim(-5,5)
-plt.ylim(-5,5)
 
-ani.save('project.gif')
+plt.axis('equal')
+plt.xlim(-2,2)
+plt.ylim(-2,2)
+
+ani.save('pr.gif')
