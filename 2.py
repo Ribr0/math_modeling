@@ -1,15 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-R = 11
-frames = 360
+R = 1
+frames = 120
 t = 0
-def f_voda(r_v, t):
-    alp = np.arange(0, np.pi*5, 0.1)
-    x = (r_v * np.sin(alp)) + t
-    y = (r_v * np.cos(alp))
-    return x, y
-    #t = t + 1
+while t <= 5:
+    def f_voda(r_v, t):
+        alp = np.arange(0, np.pi*5, 0.1)
+        x = (r_v * np.sin(alp)) + t
+        y = (r_v * np.cos(alp))
+        return x, y
+    t = t + 1
 
 def f_kaplya(R, N, t):
     x = np.zeros(N)
@@ -17,9 +18,11 @@ def f_kaplya(R, N, t):
     if R <= 2:
         for i in range(0, N, 1):
             alpha = np.linspace(0, 2 * np.pi, N)
-            x[i] = R * np.cos(alpha[i])
-            y[i] = (((R+1)*(R+1))**2) + (R * np.sin(alpha[i]) - t)
+            y[i] = (((R+1)*(R+0.5))**2) + (R * np.sin(alpha[i]) - t)
             if y[i]<=0.5:
+                break
+            x[i] = R * np.cos(alpha[i])
+            if x[i]==0:
                 break
     else:
         for i in range(0, N, 1):
@@ -31,14 +34,14 @@ def f_kaplya(R, N, t):
     return x, y
 
 def animate(i):
-    voda.set_data(f_voda(r_v=0.1, t=1))
+    voda.set_data(f_voda(r_v=0.1, t=i))
     kaplya.set_data(f_kaplya(R=R, N=360, t=(i+1)))
 
 fig, ax = plt.subplots()
 voda, = plt.plot([], [], color='black')
 kaplya, = plt.plot([], [], color='r')
 
-ani = FuncAnimation(fig, animate, frames=frames, interval=100)
+ani = FuncAnimation(fig, animate, frames=frames, interval=500)
 
 plt.axis('square')
 if R <= 10:
