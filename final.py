@@ -1,0 +1,104 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import time
+import imageio
+import os
+
+images1 = []
+for i in range(10):
+    alpha = np.linspace(0, 2*np.pi, 100)
+    x = 0 + 0.5 * np.cos(alpha)
+    y = 7 + 0.5 * np.sin(alpha) - i
+    plt.plot(x, y, color='b')
+    plt.axis('equal')
+    plt.xlim(-5, 5)
+    plt.ylim(5, 5)
+    plt.savefig(f'pic_{i+100}')
+    images1.append(f'pic_{i+100}.png')
+    plt.cla()
+
+im1 = []
+# filenames = [f'pic_{i}.png' for i in range(len(point))]
+for image in images1:
+  im1.append(imageio.imread(image))
+  os.remove(image)
+
+
+
+def static_point(point, key):
+    for i in range(len(point)):
+        alpha = np.linspace(0, 2*np.pi, 100)
+        x = point[f'point_{i}']['pos'][0] + point[f'point_{i}']['radius'] * np.cos(alpha)
+        y = point[f'point_{i}']['pos'][1] + point[f'point_{i}']['radius'] * np.sin(alpha)
+        plt.plot(x, y, color=point[f'point_{i}']['color'])
+
+    plt.axis('equal')
+    plt.xlim(boundary[0][0]+3, boundary[1][0])
+    plt.ylim(boundary[2][1], boundary[0][1]+2)
+    plt.savefig(f'pic_{key}')
+
+def check_point(point):
+
+
+    images = []
+
+
+    for i in range(len(point)):
+        if point[f'point_{i}']['color'] != 'r' and i < 39:
+            point[f'point_{i+9}']['color'] = 'b'
+            point[f'point_{i+11}']['color'] = 'b'
+            point[f'point_{i+10}']['color'] = 'b'
+            time.sleep(0.1)
+            images.append(f'pic_{i}.png')
+            static_point(point, i)
+
+
+
+    im = []
+    # filenames = [f'pic_{i}.png' for i in range(len(point))]
+    for image in images:
+      im.append(imageio.imread(image))
+      os.remove(image)
+    imageio.mimsave('movie.gif', im+im1)
+    os.remove('pic_0.png')
+
+def move_point(position, radius, color, velocity):
+    pass
+
+def run(number, num_in_str, radius, boundary):
+    '''
+    boundary: [[(x, y) up-left],
+               [(x, y) up-right],
+               [(x, y) low-left],
+               [(x, y) low-right]
+              ]
+    '''
+    position = []
+    x = boundary[0][0]
+    y = boundary[0][1]
+    for i in range(int(number/num_in_str)):
+        for j in range(num_in_str):
+            position.append([x, y])
+            x += 2 * radius
+        y -= 2 * radius
+        x = boundary[0][0]
+
+    point = {f'point_{i}': {} for i in range(number)}
+    for i in range(len(position)):
+        point[f'point_{i}'].update({'pos':position[i], 'radius': 0.5, 'color': 'r'})
+
+
+    point['point_5']['color'] = 'b'
+    static_point(point, 0)
+    check_point(point)
+
+
+
+boundary = [[-3, 3],
+            [3, 3],
+            [-3, -3],
+            [3, -3]
+           ]
+
+run(50, 10, 0.5, boundary)

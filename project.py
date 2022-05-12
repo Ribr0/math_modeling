@@ -28,8 +28,8 @@ def animate(i):
     water.clear()
     for j in range(N):
         if i < 5:
-            ball, = plt.plot([], [], color=colors[0])
-            water.append(ball)
+              ball, = plt.plot([], [], color=colors[0])
+              water.append(ball)
         else:
             ball, = plt.plot([], [], color=colors[1])
             water.append(ball)
